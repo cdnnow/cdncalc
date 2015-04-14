@@ -90,44 +90,39 @@ var
 		},
 
         CDNNOW: function () {
-            var us, eu, note;
+            var cost, note;
             var traf = $("#traffic_volume").val();
-			var result = 0;
             switch( true )
             {
-                case traf < 10240:
-                    eu = Math.ceil(traf * 0.089);
-                    us = Math.ceil(traf * 0.105);
-                    note = 'Europe, Asia - ' + eu + '$' + '<br>' +
-                        'USA, South America - ' + us + '$';
+                case traf >= 0 && traf <= 1:
+                    cost = Math.ceil(traf * 1);
+                    note = 'Europe, Asia, USA, South America - ' + cost + '$';
                     break;
 
-                case traf >= 10240 && traf < 51200:
-                    eu = Math.ceil(traf * 0.072);
-                    us = Math.ceil(traf * 0.089);
-                    note = 'Europe, Asia - ' + eu + '$' + '<br>' +
-                        'USA, South America - ' + us + '$';
+                case traf >= 2 && traf <= 1900:
+                    cost = Math.ceil(traf * 0.05);
+                    note = 'Europe, Asia, USA, South America - ' + cost + '$';
                     break;
 
-                case traf >= 51200 && traf < 102400:
-                    eu = Math.ceil(traf * 0.064);
-                    us = Math.ceil(traf * 0.080);
-                    note = 'Europe, Asia - ' + eu + '$' + '<br>' +
-                        'USA, South America - ' + us + '$';
+                case traf >= 1901 && traf <= 24000:
+                    cost = Math.ceil(traf * 0.04);
+                    note = 'Europe, Asia, USA, South America - ' + cost + '$';
                     break;
 
-                case traf >= 102400:
-                    eu = Math.ceil(traf * 0.056);
-                    us = Math.ceil(traf * 0.072);
-                    note = 'Europe, Asia - ' + eu + '$' + '<br>' +
-                        'USA, South America - ' + us + '$';
+                case traf >= 24001 && traf <= 1000000:
+                    cost = Math.ceil(traf * 0.02);
+                    note = 'Europe, Asia, USA, South America - ' + cost + '$';
+                    break;
+
+                case traf >= 1000001:
+                    cost = Math.ceil(traf * 0.009);
+                    note = 'Europe, Asia, USA, South America - ' + cost + '$';
                     break;
 
             }
 
-			result = us + eu;
             show_cdn_plan_notes("CDNNOW", note);
-            $("#traffic_info tr:contains(CDNNOW) td:last").html('$' + result);
+            $("#traffic_info tr:contains(CDNNOW) td:last").html('$' + cost);
         },
 		
 		MtProCDN: function () {
